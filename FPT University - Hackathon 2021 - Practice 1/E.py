@@ -2,7 +2,7 @@ import sys
 import math
 
 # Config 
-TEST_MODE = True
+TEST_MODE = False
 NUM_OF_TEST = 2
 
 def getToRemove(map, remove):
