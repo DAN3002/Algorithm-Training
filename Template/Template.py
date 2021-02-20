@@ -1,5 +1,5 @@
 import sys
-import math 
+import math
 
 # Config 
 TEST_MODE = True
