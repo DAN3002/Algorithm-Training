@@ -7,10 +7,10 @@ NUM_OF_TEST = 3
 
 # Solver
 def solver(content):
-    n = int(content[0])
+    n = int(input())
     arr = []
     for i in range(1, n + 1):
-        arr.append(int(content[i]))
+        arr.append(int(input()))
 
     out = 0
     for i, el in enumerate(arr):
@@ -36,8 +36,9 @@ if __name__ == '__main__':
             solveByPath(path)
 
     else:
-        filename = input()
-        solveByPath(filename)
+        solver(None)
+        # filename = input()
+        # solveByPath(filename)
 
 
 

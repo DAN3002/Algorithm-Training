@@ -7,8 +7,8 @@ NUM_OF_TEST = 2
 
 # Solver
 def solver(content):
-	n = 2 ** int(content[0])
-	arr = [int(s) for s in content[1].split(' ')]
+	n = 2 ** int(input())
+	arr = [int(s) for s in input().split(' ')]
 
 	move = []
 	for i in range(n):
@@ -43,7 +43,8 @@ if __name__ == '__main__':
             solveByPath(path)
 
     else:
-        filename = input()
-        solveByPath(filename)
+        solver(None)
+        # filename = input()
+        # solveByPath(filename)
 
 

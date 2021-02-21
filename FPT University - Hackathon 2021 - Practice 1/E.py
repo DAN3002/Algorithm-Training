@@ -30,8 +30,8 @@ def getToRemove(map, remove):
 
 # Solver
 def solver(content):
-	n, l = [int(s) for s in content[0].split(' ')]
-	arr = [int(s) for s in content[1].split(' ')]
+	n, l = [int(s) for s in input().split(' ')]
+	arr = [int(s) for s in input().split(' ')]
 	arr.sort()
 
 	map = {}
@@ -70,8 +70,9 @@ if __name__ == '__main__':
             solveByPath(path)
 
     else:
-        filename = input()
-        solveByPath(filename)
+        solver(None)
+        # filename = input()
+        # solveByPath(filename)
 
 
 

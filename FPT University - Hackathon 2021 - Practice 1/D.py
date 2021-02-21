@@ -64,10 +64,10 @@ def solver(content):
     startX = 0
     startY = 0
 
-    n, m = [int(i) for i in content[0].split(' ')]
+    n, m = [int(i) for i in input().split(' ')]
     
     for i in range(1, n + 1):
-        row = list(content[i])
+        row = list(input())
         for j in range(m):
             if row[j] == '*':
                 virusIndex.append((i-1, j))
@@ -101,5 +101,6 @@ if __name__ == '__main__':
             solveByPath(path)
 
     else:
-        filename = input()
-        solveByPath(filename)
+        solver(None)
+        # filename = input()
+        # solveByPath(filename)
