@@ -18,9 +18,11 @@ def solver(content):
 				minVal = (j, arr[j])
 
 		val = minVal[0]
-		arr = arr[:i] + [arr[val]] + arr[i:val] + arr[(val+1):]
-		for x in range(val, i, -1):
-			move.append((x, x - 1))
+		if val != i:
+			arr[val] = arr[i]
+			arr[i] = minVal[1]
+
+			move.append((i, val))
 
 	print(len(move))
 	for i, j in move:

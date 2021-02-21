@@ -34,25 +34,16 @@ def solver(content):
 	arr = [int(s) for s in input().split(' ')]
 	arr.sort()
 
-	map = {}
-	for i in arr:
-		map[i] = []
+	minValue = arr[0]
+	count = 1
+	for i in range(1, n):
+		el = arr[i]
+		if el >= minValue + l:
+			count += 1
+			minValue = el
 	
-	for i, el in enumerate(arr):
-		for j in range(i + 1, n):
-			if arr[j] >= el + l:
-				break
+	print(n - count)
 
-			map[el].append(arr[j])
-			map[arr[j]].append(el)
-
-	out = 0
-	remove = getToRemove(map, None)
-	while remove is not None:
-		remove = getToRemove(map, remove)
-		out += 1
-	
-	print(out)
 
 def solveByPath(path):
     with open(path) as f:

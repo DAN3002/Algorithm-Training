@@ -2,7 +2,7 @@ import sys
 import math 
 
 # Config 
-TEST_MODE = False
+TEST_MODE = True
 NUM_OF_TEST = 5
 
 #Global
@@ -12,6 +12,7 @@ MOVES = [
 out = -1
 arr = []
 map = []
+index = []
 virusIndex = []
 n = 0
 m = 0
@@ -26,6 +27,7 @@ def canMove():
 # x = row, y = column
 def findWay(x, y, minDistance, map):
     global out
+    global index
 
     if x < 0 or x >= n or y < 0 or y >= m:
         return
@@ -35,11 +37,19 @@ def findWay(x, y, minDistance, map):
 
     if arr[x][y] == 'E':
         out = max(out, minDistance)
+
+        for i in range(n):
+            for j in range(m):
+                if map[i][j]:
+                    index[i][j] = out
         return
 
     if map[x][y]:
         return
     
+    if minDistance <= index[x][y]:
+        return
+
     for visrus in virusIndex:
         minDistance = min(minDistance, calDistance((x,y), visrus))
         if minDistance <= out:
@@ -56,6 +66,7 @@ def solver(content):
     global out
     global arr
     global virusIndex
+    global index
 
     out = -1
     arr = []
@@ -64,10 +75,10 @@ def solver(content):
     startX = 0
     startY = 0
 
-    n, m = [int(i) for i in input().split(' ')]
+    n, m = [int(i) for i in content[0].split(' ')]
     
     for i in range(1, n + 1):
-        row = list(input())
+        row = list(content[i])
         for j in range(m):
             if row[j] == '*':
                 virusIndex.append((i-1, j))
@@ -78,6 +89,8 @@ def solver(content):
         arr.append(row)
     
     map = [([False] * m) for i in range(n)]
+    index = [([0] * m) for i in range(n)]
+
     findWay(startX, startY, max(m + 1, n + 1), map)
 
     if not out == -1 and len(virusIndex) == 0:
