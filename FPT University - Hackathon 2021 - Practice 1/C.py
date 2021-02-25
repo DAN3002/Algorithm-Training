@@ -2,31 +2,66 @@ import sys
 import math
 
 # Config 
-TEST_MODE = False
-NUM_OF_TEST = 2
+TEST_MODE = True
+NUM_OF_TEST = 1
 
 # Solver
+out = []
+
+def isPowerOfTwo( x ): 
+    return x and (not(x & (x - 1))) 
+
+def findMove(map, current, end, move):
+	global out
+
+	if current == end:
+		out += move
+		return
+	
+	if current in [el[1] for el in move]:
+		return
+
+	next = map[current]
+	for i in next:
+		findMove(map, i, end, move + [(current, i)])
+
 def solver(content):
-	n = 2 ** int(input())
-	arr = [int(s) for s in input().split(' ')]
+	global out
+	# n = int(input())
+	# arr = [int(s) for s in input().split(' ')]
+	n = 2 ** int(content[0])
+	arr = [int(s) for s in content[1].split(' ')]
+	out = []
 
-	move = []
+	arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+	n = len(arr)
+
+	mapIndex = {}
+	map = {}
+
+	for i,el in enumerate(arr):
+		mapIndex[el] = i
+		map[i] = []
+
 	for i in range(n):
-		minVal = (i, arr[i])
 		for j in range(i, n):
-			if arr[j] < minVal[1]:
-				minVal = (j, arr[j])
-
-		val = minVal[0]
-		if val != i:
-			arr[val] = arr[i]
-			arr[i] = minVal[1]
-
-			move.append((i, val))
-
-	print(len(move))
-	for i, j in move:
+			if isPowerOfTwo(i ^ j):
+				map[i].append(j)
+				map[j].append(i)
+	
+	sort = sorted(arr)
+	for i, el in enumerate(sort):
+		realIndex = mapIndex[el]
+		if i != realIndex:
+			findMove(map, i,  realIndex, [])
+			mapIndex[el] = i
+			mapIndex[arr[i]] = realIndex
+			
+	print(len(out))
+	print(arr)
+	for i, j in out:
 		print(f'{i} {j}')
+
 
 
 def solveByPath(path):

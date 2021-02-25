@@ -26,8 +26,7 @@ if __name__ == '__main__':
             solveByPath(path)
 
     else:
-        filename = input()
-        solveByPath(filename)
+        solver(None)
 
 
 
