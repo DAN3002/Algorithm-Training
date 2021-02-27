@@ -1,4 +1,4 @@
-# FPT University - Hackathon 2021 - Practice 1
+# FPT University - Hackathon 2021 - Round 1
 
 Code contest for FPT Edu Hackathon 2021 round 1.
 
