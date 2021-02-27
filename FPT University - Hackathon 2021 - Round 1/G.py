@@ -20,16 +20,6 @@ def get_sub(maxtrix, x, y, n, m):
 
 # Solver
 def solver(content):
-    # n1, m1, n2, m2 = [int(i) for i in content[0].split(' ')]
-
-    # data = []
-    # for i in range(1, n1 + 1):
-    #     data.append([int(i) for i in content[i].split(' ')])
-    
-    # filter = []
-    # for i in range(1, n2 + 1):
-    #     filter.append([int(i) for i in content[n1 + i].split(' ')])
-
     n1, m1, n2, m2 = [int(i) for i in input().split(' ')]
 
     data = []

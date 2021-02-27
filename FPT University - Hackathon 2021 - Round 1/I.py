@@ -19,7 +19,6 @@ def rotate90Clockwise(A):
 def solver(content):
     arr = []
     for i in range(8):
-        # row = list(content[i])
         row = list(input())
         while len(row) != 8:
             row.append(' ')

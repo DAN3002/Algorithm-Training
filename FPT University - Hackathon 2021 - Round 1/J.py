@@ -7,9 +7,6 @@ NUM_OF_TEST = 1
 
 # Solver
 def solver(content):
-    # n = int(content[0])
-    # arr = [int(i) for i in content[1].split(' ')]
-
     n = int(input())
     arr = [int(i) for i in input().split(' ')]
 

@@ -5,7 +5,6 @@ import math
 TEST_MODE = False
 NUM_OF_TEST = 4
 
-
 def sumNatural(n): 
     sum = (n * (n + 1)) 
     return int(sum) 
@@ -16,7 +15,6 @@ def sumEven(l, r):
 
 # Solver
 def solver(content):
-    # m, n = [int(i) for i in content[0].split(' ')]
     m, n = [int(i) for i in input().split(' ')]
     print(sumEven(min(m,n), max(m, n)))
 
