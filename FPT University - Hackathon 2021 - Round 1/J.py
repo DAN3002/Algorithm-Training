@@ -2,12 +2,24 @@ import sys
 import math
 
 # Config 
-TEST_MODE = True
+TEST_MODE = False
 NUM_OF_TEST = 1
 
 # Solver
 def solver(content):
-    pass
+    # n = int(content[0])
+    # arr = [int(i) for i in content[1].split(' ')]
+
+    n = int(input())
+    arr = [int(i) for i in input().split(' ')]
+
+    out = 0
+    for i in arr:
+        mol = i % arr[n - 1]
+        if mol % 2 == 1:
+            out += mol
+    
+    print(out)
 
 
 def solveByPath(path):
