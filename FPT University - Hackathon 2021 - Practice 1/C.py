@@ -2,7 +2,7 @@ import sys
 import math
 
 # Config 
-TEST_MODE = True
+TEST_MODE = False
 NUM_OF_TEST = 1
 
 # Solver
@@ -27,8 +27,8 @@ def findMove(map, current, end, move):
 
 def solver(content):
 	global out
-	# n = int(input())
-	# arr = [int(s) for s in input().split(' ')]
+
+
 	n = 2 ** int(content[0])
 	arr = [int(s) for s in content[1].split(' ')]
 	out = []
@@ -81,7 +81,3 @@ if __name__ == '__main__':
 
     else:
         solver(None)
-        # filename = input()
-        # solveByPath(filename)
-
-

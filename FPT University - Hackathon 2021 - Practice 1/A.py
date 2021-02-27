@@ -7,8 +7,8 @@ NUM_OF_TEST = 3
 
 # Solver
 def solver(content):
-    average = int(content[0])
-    twoWeek = int(content[1])
+    average = int(input())
+    twoWeek = int(input())
     if average <= 50 and twoWeek <= 10:
         print("White")
     elif twoWeek > 30:
@@ -33,8 +33,4 @@ if __name__ == '__main__':
             solveByPath(path)
 
     else:
-        filename = input()
-        solveByPath(filename)
-
-
-
+        solver(None)

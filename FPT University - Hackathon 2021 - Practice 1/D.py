@@ -2,7 +2,7 @@ import sys
 import math 
 
 # Config 
-TEST_MODE = True
+TEST_MODE = False
 NUM_OF_TEST = 1
 
 #Global
@@ -71,7 +71,6 @@ def solver(content):
     startX = 0
     startY = 0
 
-    # n, m = [int(i) for i in input().split(' ')]
     n, m = [int(i) for i in content[0].split(' ')]
     
     for i in range(1, n + 1):
@@ -124,5 +123,3 @@ if __name__ == '__main__':
 
     else:
         solver(None)
-        # filename = input()
-        # solveByPath(filename)
