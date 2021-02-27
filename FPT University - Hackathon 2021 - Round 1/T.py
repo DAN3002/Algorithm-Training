@@ -1,18 +1,18 @@
+import glob
+import os
 import sys
-import math
 
-# Config 
-TEST_MODE = False
-NUM_OF_TEST = 1
-
-# Solver
-def solver(content):
-	d, k = [int(i) for i in input().split(' ')]
+def solve(filename):
+	k = 0
 	pixels = [0 for i in range(0, 256)]
-
-	for i in range(d):
-		r, p = [int(i) for i in input().split(' ')]
-		pixels[r] = p
+	with open(filename, 'r') as file:
+		for (i, l) in enumerate(file):
+			line = l.strip().split()
+			if i == 0:
+				k = int(line[1])
+			else:
+				pixels[int(line[0])] = int(line[1])
+	print(k)
 
 	after = [0 for i in range(256)]
 	for c in range(0, 256):
@@ -54,27 +54,5 @@ def solver(content):
 		if s < answer:
 			answer = s
 
-	print(answer)
-
-
-
-def solveByPath(path):
-    with open(path) as f:
-        content = f.readlines()
-    content = [x.strip() for x in content]
-    solver(content)
-
-if __name__ == '__main__':
-    if TEST_MODE:
-        for i in range(1, NUM_OF_TEST + 1):
-            problem = sys.argv[0].replace('.py', '')
-            path = f'testcase/samples-{problem}/{i}.in'
-            print('----------')
-            print('TestCase ' + str(i))
-            solveByPath(path)
-
-    else:
-        solver(None)
-
-
-
+filename = input()
+solve(filename)

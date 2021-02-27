@@ -2,14 +2,15 @@ import sys
 import math
 
 # Config 
-TEST_MODE = True
+TEST_MODE = False
 NUM_OF_TEST = 1
 
 def dot(x, y):
-    size = len(x)
+    n = len(x)
+    m = len(x[0])
     sum = 0
-    for i in range(size):
-        for j in range(size):
+    for i in range(n):
+        for j in range(m):
             sum += x[i][j] * y[i][j]
 
     return sum
@@ -41,7 +42,7 @@ def solver(content):
 
     sizeX = n1 - n2 + 1
     sizeY = m1 - m2 + 1
-    out = [[0] * sizeX for i in range(sizeY)]
+    out = [["0"] * sizeX for i in range(sizeY)]
 
     for i in range(sizeY):
         for j in range(sizeX):
