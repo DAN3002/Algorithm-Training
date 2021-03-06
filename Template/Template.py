@@ -8,7 +8,7 @@ NUM_OF_TEST = 3
 
 # Solver
 def solver(input):
-    pass
+    ...
 
 def solveByPath(path):
     with open(path) as f: content = f.readlines()
