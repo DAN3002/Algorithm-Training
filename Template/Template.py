@@ -10,12 +10,10 @@ NUM_OF_TEST = 3
 def solver(input):
     pass
 
-
 def solveByPath(path):
     with open(path) as f: content = f.readlines()
     holder = (x.strip() for x in content)
     solver(lambda: next(holder))
-
 
 if __name__ == '__main__':
     if TEST_MODE:
