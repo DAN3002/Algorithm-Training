@@ -6,11 +6,8 @@ import math
 TEST_MODE = True
 NUM_OF_TEST = 3
 
-
 # Solver
-def solver(get_line):
-    input = get_line  # <-- change TEST_MODE to TRUE and comment out this line
-
+def solver(input):
     ...
     print(input())
     ...
@@ -35,4 +32,4 @@ if __name__ == '__main__':
             print('TestCase ' + str(i))
             solveByPath(path)
     else:
-        solver(None)
+        solver(input)
