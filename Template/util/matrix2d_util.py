@@ -1,4 +1,4 @@
-from operator import mul
+import math
 
 
 def matmul(matrix_a, matrix_b):
@@ -48,7 +48,7 @@ def entrywise_product(matrix_a, matrix_b):
             and _check_not_integer(matrix_b)
             and _verify_matrix_sizes(matrix_a, matrix_b)
     ):
-        return [list(map(mul, zip(*m))) for m in zip(matrix_a, matrix_b)]
+        return [list(map(math.prod, zip(*m))) for m in zip(matrix_a, matrix_b)]
 
 
 def full(shape: list, fill_value):
@@ -82,7 +82,7 @@ def scalar_multiply(matrix, n: int):
     return [[x * n for x in row] for row in matrix]
 
 
-def transpose(matrix, return_map: bool = True):
+def transpose(matrix, return_map: bool = False):
     if _check_not_integer(matrix):
         if return_map:
             return map(list, zip(*matrix))
