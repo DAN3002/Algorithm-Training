@@ -1,8 +1,7 @@
-from __future__ import annotations
 from operator import mul
 
 
-def matmul(matrix_a: list[list], matrix_b: list[list]) -> list[list]:
+def matmul(matrix_a, matrix_b):
     # or dot product
     if _check_not_integer(matrix_a) and _check_not_integer(matrix_b):
         rows, cols = _verify_matrix_sizes(matrix_a, matrix_b)
@@ -17,7 +16,7 @@ def matmul(matrix_a: list[list], matrix_b: list[list]) -> list[list]:
     ]
 
 
-def rotate_matrix(M: list[list], degree: int) -> list[list]:  # 2d array, also allow string
+def rotate_matrix(M, degree: int):  # 2d array, also allow string
     h = len(M)
     w = len(M[0])
     if degree == 90:
@@ -30,7 +29,7 @@ def rotate_matrix(M: list[list], degree: int) -> list[list]:  # 2d array, also a
         raise ValueError(degree)
 
 
-def slicing_2d(matrix: list[list], x, y) -> list[list]:
+def slicing_2d(matrix, x, y):
     """
     M[0:3, 1:4] == slicing_2d(M, (0, 3), (1, 4))
     M[0:3:2, 1:4:2] == slicing_2d(M, (0, 3, 2), (1, 4, 2))
@@ -42,7 +41,7 @@ def slicing_2d(matrix: list[list], x, y) -> list[list]:
     return [matrix[_x][y_begin: y_end: y_step] for _x in range(x_begin, x_end, x_step)]
 
 
-def entrywise_product(matrix_a: list[list], matrix_b: list[list]) -> list[list]:
+def entrywise_product(matrix_a, matrix_b):
     # or hadamard product
     if (
             _check_not_integer(matrix_a)
@@ -63,14 +62,14 @@ def full(shape: list, fill_value):
         raise ValueError(shape)
 
 
-def add(*matrix_s: list[list]) -> list[list]:
+def add(*matrix_s):
     if all(_check_not_integer(m) for m in matrix_s):
         for i in matrix_s[1:]:
             _verify_matrix_sizes(matrix_s[0], i)
         return [[sum(t) for t in zip(*m)] for m in zip(*matrix_s)]
 
 
-def subtract(matrix_a: list[list], matrix_b: list[list]) -> list[list]:
+def subtract(matrix_a, matrix_b):
     if (
             _check_not_integer(matrix_a)
             and _check_not_integer(matrix_b)
@@ -79,11 +78,11 @@ def subtract(matrix_a: list[list], matrix_b: list[list]) -> list[list]:
         return [[i - j for i, j in zip(*m)] for m in zip(matrix_a, matrix_b)]
 
 
-def scalar_multiply(matrix: list[list], n: int) -> list[list]:
+def scalar_multiply(matrix, n: int):
     return [[x * n for x in row] for row in matrix]
 
 
-def transpose(matrix: list[list], return_map: bool = True) -> list[list]:
+def transpose(matrix, return_map: bool = True):
     if _check_not_integer(matrix):
         if return_map:
             return map(list, zip(*matrix))
@@ -91,7 +90,7 @@ def transpose(matrix: list[list], return_map: bool = True) -> list[list]:
             return list(map(list, zip(*matrix)))
 
 
-def inverse(matrix: list[list]) -> list[list]:
+def inverse(matrix):
     det = determinant(matrix)
     if det == 0:
         return None
@@ -109,17 +108,17 @@ def inverse(matrix: list[list]) -> list[list]:
     return scalar_multiply(adjugate, 1 / det)
 
 
-def identity(n: int) -> list[list]:
+def identity(n: int):
     n = int(n)
     return [[int(row == column) for column in range(n)] for row in range(n)]
 
 
-def minor(matrix: list[list], row: int, column: int) -> list[list]:
+def minor(matrix, row: int, column: int):
     minor = matrix[:row] + matrix[row + 1:]
     return [row[:column] + row[column + 1:] for row in minor]
 
 
-def determinant(matrix: list[list]) -> int:
+def determinant(matrix) -> int:
     if len(matrix) == 1:
         return matrix[0][0]
 
@@ -129,17 +128,17 @@ def determinant(matrix: list[list]) -> int:
     )
 
 
-def _check_not_integer(matrix: list[list]) -> bool:
+def _check_not_integer(matrix) -> bool:
     if not isinstance(matrix, int) and not isinstance(matrix[0], int):
         return True
     raise TypeError("Expected a matrix, got int/list instead")
 
 
-def _shape(matrix: list[list]) -> list:
+def _shape(matrix) -> list:
     return len(matrix), len(matrix[0])
 
 
-def _verify_matrix_sizes(matrix_a: list[list], matrix_b: list[list]) -> tuple[list]:
+def _verify_matrix_sizes(matrix_a, matrix_b) -> tuple[list]:
     shape = _shape(matrix_a) + _shape(matrix_b)
     if shape[0] != shape[3] or shape[1] != shape[2]:
         raise ValueError(
