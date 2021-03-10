@@ -1,6 +1,6 @@
 import random
 import math
-from statistics import mean
+import statistics
 
 
 def mean_threshold(image):
@@ -15,7 +15,7 @@ def mean_threshold(image):
     return image
 
 
-def k_mean(data, k: int, iteration: int, cost_distance=lambda a, b: abs(a - b)):
+def k_mean(data, k: int, iteration: int, cost_distance=lambda point, centroid: abs(point - centroid), mean_function=statistics.mean):
     # cost_distance=lambda a, b: math.dist(a, b)
     centroids = random.sample(data, k)
     for _ in range(iteration):
@@ -28,7 +28,7 @@ def k_mean(data, k: int, iteration: int, cost_distance=lambda a, b: abs(a - b)):
         # move cluster to mean
         for i, assigned_data in enumerate(centroid_holder):
             if assigned_data:
-                centroids[i] = mean(assigned_data)
+                centroids[i] = mean_function(assigned_data)
             else:
                 centroids[i] = random.choice(data)
     return centroids, centroid_holder
