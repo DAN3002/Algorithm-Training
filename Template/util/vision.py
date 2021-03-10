@@ -109,9 +109,26 @@ def avg_pooling(image, filt_size=(3, 3), stride=None, padding=(0, 0)):
     return out
 
 
+def padding_2d_with_value(image, padding=(1, 1), value=0):
+    p_x, p_y = padding
+    image_x = len(image)
+    image_y = len(image[0])
+    padded_len_x = image_x + 2 * p_x
+    padded_len_y = image_y + 2 * p_y
+
+    image_padded = [[value] * padded_len_y for _ in range(padded_len_x)]
+
+    for i in range(image_x):
+        image_padded[i + p_x][p_y:p_y + image_y] = image[i]
+
+    return image_padded
+
+
+# -------------
+
 # from colorsys import rgb_to_hsv
 def rgb_to_hsv(r: int, g: int, b: int):
-    r, g, b = r/255, g/255, b/255
+    r, g, b = r / 255, g / 255, b / 255
     h, s, v = 0, 0, 0
 
     cmax = max(r, g, b)
@@ -141,10 +158,14 @@ h: 0 -> 360
 saturation: 0 -> 1
 value: 0 -> 1
 """
+
+
 def hsv_to_rgb(h, s, v):
     if s == 0.0: return (v, v, v)
-    i = int(h*6.)
-    f = (h*6.)-i; p,q,t = v*(1.-s), v*(1.-s*f), v*(1.-s*(1.-f)); i%=6
+    i = int(h * 6.)
+    f = (h * 6.) - i;
+    p, q, t = v * (1. - s), v * (1. - s * f), v * (1. - s * (1. - f));
+    i %= 6
     if i == 0: return (v, t, p)
     if i == 1: return (q, v, p)
     if i == 2: return (p, v, t)

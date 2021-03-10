@@ -1,19 +1,11 @@
 import math
+import operator
 
 
 def matmul(matrix_a, matrix_b):
-    # or dot product
-    if _check_not_integer(matrix_a) and _check_not_integer(matrix_b):
-        rows, cols = _verify_matrix_sizes(matrix_a, matrix_b)
-
-    if cols[0] != rows[1]:
-        raise ValueError(
-            f"Cannot multiply matrix of dimensions ({rows[0]},{cols[0]}) "
-            f"and ({rows[1]},{cols[1]})"
-        )
-    return [
-        [sum(m * n for m, n in zip(i, j)) for j in zip(*matrix_b)] for i in matrix_a
-    ]
+    # doesn't check cols[0] != rows[1], so will not throw Exception when error
+    # -> use with caution!!!
+    return [[sum(m * n for m, n in zip(i, j)) for j in zip(*matrix_b)] for i in matrix_a]
 
 
 def rotate_matrix(M, degree: int):  # 2d array, also allow string
@@ -41,14 +33,21 @@ def slicing_2d(matrix, x, y):
     return [matrix[_x][y_begin: y_end: y_step] for _x in range(x_begin, x_end, x_step)]
 
 
+def slicing_2d_with_assignment(A, B, slice_A, slice_B):
+    """
+    # assign *inplace* to matrix A, doesn't include error checking
+    A[0:3, 1:4] = B[1:4, 2:5] -> slicing_2d_with_assignment(A, B, slice_A=((0, 3, 1), (1, 4, 1)), slice_B=((1, 4, 1), (2, 5, 1)))
+    A[0:7:2, 1:8:2] = B[1:5:1, 2:6:1] -> slicing_2d_with_assignment(A, B, slice_A=((0, 7, 2), (1, 8, 2)), slice_B=((1, 5, 1), (2, 6, 1)))
+    """
+    _ = slice_A
+    __ = slice_B
+    for i, j in zip(range(*slice_A[0]), range(*slice_B[0])):
+        A[i][_[1][0]:_[1][1]:_[1][2]] = B[j][__[1][0]:__[1][1]:__[1][2]]
+
+
 def entrywise_product(matrix_a, matrix_b):
     # or hadamard product
-    if (
-            _check_not_integer(matrix_a)
-            and _check_not_integer(matrix_b)
-            and _verify_matrix_sizes(matrix_a, matrix_b)
-    ):
-        return [list(map(math.prod, zip(*m))) for m in zip(matrix_a, matrix_b)]
+    return [list(map(operator.mul, *m)) for m in zip(matrix_a, matrix_b)]
 
 
 def full(shape: list, fill_value):
@@ -62,32 +61,37 @@ def full(shape: list, fill_value):
         raise ValueError(shape)
 
 
+def transpose(matrix, return_map: bool = False):
+    if return_map:
+        return map(list, zip(*matrix))
+    else:
+        return list(map(list, zip(*matrix)))
+
+
+def hstack(matrix_a, matrix_b):
+    return list(map(operator.add, matrix_a, matrix_b))
+
+
+def vstack(matrix_a, matrix_b):
+    # only apply to 2d native python list (list of list)
+    return matrix_a + matrix_b
+
+
+# ---------------------------
+
 def add(*matrix_s):
-    if all(_check_not_integer(m) for m in matrix_s):
-        for i in matrix_s[1:]:
-            _verify_matrix_sizes(matrix_s[0], i)
-        return [[sum(t) for t in zip(*m)] for m in zip(*matrix_s)]
+    return [[sum(t) for t in zip(*m)] for m in zip(*matrix_s)]
 
 
 def subtract(matrix_a, matrix_b):
-    if (
-            _check_not_integer(matrix_a)
-            and _check_not_integer(matrix_b)
-            and _verify_matrix_sizes(matrix_a, matrix_b)
-    ):
-        return [[i - j for i, j in zip(*m)] for m in zip(matrix_a, matrix_b)]
+    return [list(map(operator.sub, *m)) for m in zip(matrix_a, matrix_b)]
 
 
-def scalar_multiply(matrix, n: int):
+def scalar_multiply(matrix, n):
     return [[x * n for x in row] for row in matrix]
 
 
-def transpose(matrix, return_map: bool = False):
-    if _check_not_integer(matrix):
-        if return_map:
-            return map(list, zip(*matrix))
-        else:
-            return list(map(list, zip(*matrix)))
+# ---
 
 
 def inverse(matrix):
@@ -134,11 +138,11 @@ def _check_not_integer(matrix) -> bool:
     raise TypeError("Expected a matrix, got int/list instead")
 
 
-def _shape(matrix) -> list:
+def _shape(matrix) -> tuple:
     return len(matrix), len(matrix[0])
 
 
-def _verify_matrix_sizes(matrix_a, matrix_b) -> tuple[list]:
+def _verify_matrix_sizes(matrix_a, matrix_b):
     shape = _shape(matrix_a) + _shape(matrix_b)
     if shape[0] != shape[3] or shape[1] != shape[2]:
         raise ValueError(
@@ -146,3 +150,17 @@ def _verify_matrix_sizes(matrix_a, matrix_b) -> tuple[list]:
             f"({shape[0], shape[1]}), ({shape[2], shape[3]})"
         )
     return (shape[0], shape[2]), (shape[1], shape[3])
+
+
+def _matmul(matrix_a, matrix_b):
+    # or dot product
+    if _check_not_integer(matrix_a) and _check_not_integer(matrix_b):
+        rows, cols = _verify_matrix_sizes(matrix_a, matrix_b)
+    if cols[0] != rows[1]:
+        raise ValueError(
+            f"Cannot multiply matrix of dimensions ({rows[0]},{cols[0]}) "
+            f"and ({rows[1]},{cols[1]})"
+        )
+    return [
+        [sum(m * n for m, n in zip(i, j)) for j in zip(*matrix_b)] for i in matrix_a
+    ]

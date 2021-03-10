@@ -1,8 +1,9 @@
 import math
+import operator
 
 
 def dot(vector1, vector2):
-    return sum(map(math.prod, zip(vector1, vector2)))
+    return sum(map(operator.mul, vector1, vector2))
 
 
 def outer_product(vector1, vector2):
@@ -11,9 +12,9 @@ def outer_product(vector1, vector2):
     return [[sum(m * n for m, n in zip(i, j)) for j in zip(*vector2)] for i in vector1]
 
 
-def flatten(vector):
-    # roll 2d to 1d
-    return [_ for __ in vector for _ in __]
+# def flatten(vector):
+#     # roll 2d to 1d
+#     return [_ for __ in vector for _ in __]
 
 
 def vector_projection_to_vector(u, v):
