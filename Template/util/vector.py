@@ -36,3 +36,11 @@ def linspace(start, stop, n):
     h = (stop - start) / (n - 1)
     for i in range(n):
         yield start + h * i
+
+def left_rotate_n_time(arr, d, n):
+    l = len(arr)
+    out = [0 for _ in range(l)]
+
+    for i, el in enumerate(arr):
+        out[(d * n + i) % l] = el
+    return out
