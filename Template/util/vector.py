@@ -37,6 +37,8 @@ def linspace(start, stop, n):
     for i in range(n):
         yield start + h * i
 
+
+# ---
 def left_rotate_n_time(arr, d, n):
     l = len(arr)
     out = [0 for _ in range(l)]
@@ -44,3 +46,14 @@ def left_rotate_n_time(arr, d, n):
     for i, el in enumerate(arr):
         out[(d * n + i) % l] = el
     return out
+
+
+def get_all_contiguous_sub_arrays(arr, size=-1):
+    length = len(arr)
+    if size == -1:
+        # all size
+        return [arr[i:i + j] for i in range(0, length) for j in range(1, length - i + 1)]
+    else:
+        return [arr[i: i + size] for i in range(0, length - size + 1)]
+
+# import itertools.combinations, itertools.permutations -> all subsequences
