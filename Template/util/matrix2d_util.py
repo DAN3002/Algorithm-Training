@@ -90,7 +90,6 @@ def subtract(matrix_a, matrix_b):
 def scalar_multiply(matrix, n):
     return [[x * n for x in row] for row in matrix]
 
-
 # ---
 
 
