@@ -1,12 +1,28 @@
 import os
 import math
 
-TEST_MODE = True
-# TEST_MODE = False
-NUM_OF_TEST = 3
-
+# TEST_MODE = True
+TEST_MODE = False
+NUM_OF_TEST = 2
 
 def solver(input):
+    ...
+    A = list(input())
+    current = A[0]
+    out = ""
+    count = 0
+    for i, e in enumerate(A):
+        if current == e:
+            count += 1
+        else:
+            out += current
+            out += str(count)
+            current = e
+            count = 1
+
+    out += str(current)
+    out += str(count)
+    print(out)
     ...
 
 

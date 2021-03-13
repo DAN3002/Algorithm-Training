@@ -1,12 +1,19 @@
 import os
 import math
 
-TEST_MODE = True
-# TEST_MODE = False
+# TEST_MODE = True
+TEST_MODE = False
 NUM_OF_TEST = 3
 
-
 def solver(input):
+    A = [list(input()) for i in range(8)]
+    # print(A)
+    for i in range(8):
+        A[i] = A[i][::-1]
+
+    for row in A:
+        # print(row)
+        print(''.join(row))
     ...
 
 

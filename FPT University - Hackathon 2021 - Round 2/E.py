@@ -1,13 +1,26 @@
 import os
 import math
+from collections import Counter
 
-TEST_MODE = True
-# TEST_MODE = False
+# TEST_MODE = True
+TEST_MODE = False
 NUM_OF_TEST = 3
 
-
 def solver(input):
-    ...
+    s = 'aeiouy'
+    A = list(input().lower())
+    A = [el for el in A if el in s]
+
+    count = Counter(A)
+    count = sorted([(i, e) for i, e in count.items()], key=lambda x: x[0])
+    count = sorted([(i, e) for i, e in count], key=lambda x: x[1], reverse=True)
+
+    out = []
+    for i, e in count:
+        out.append(f'{i}({e})')
+
+    # print(out)
+    print(' '.join(out))
 
 
 if __name__ == '__main__':
