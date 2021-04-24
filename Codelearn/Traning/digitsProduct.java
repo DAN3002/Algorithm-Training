@@ -1,22 +1,14 @@
-public class digitsProduct {
-    public static void main(String[] args) {
-        System.out.println(digitsProduct(12));
-    }
-    private static int digitsProduct(int product)
-    {
-        if(product == 0) return 10;
-        StringBuilder str = new StringBuilder();
-        for(int i = 9; i >= 2 && product > 1; i--)
-        {
-            while(product % i == 0)
-            {
-                product /= i;
-                str.insert(0, String.valueOf(i));
-                System.out.println(i);
-            }
-        }
-        if(product == 1) return Integer.parseInt(str.toString());
-        return -1;
-
-    }
+int digitsProduct(int product)
+{
+        for(int i = 1; i < 99999; i++) {
+            String digits = String.valueOf(i);
+            int result = Character.getNumericValue(digits.charAt(0));
+            for(int j = 1; j < digits.length(); j++)
+            {
+                result *= Character.getNumericValue(digits.charAt(j));
+            }
+            if(result == product) return Integer.parseInt(digits);
+        }
+        return -1;
 }
+ 
