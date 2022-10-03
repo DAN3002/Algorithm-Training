@@ -14,8 +14,7 @@ import sys
 #
 
 def weightedMean(X, W):
-	pass
-    # Write your code here
+	print(round(sum([x*w for x,w in zip(X,W)]) / sum(W), 1))
 
 if __name__ == '__main__':
     n = int(input().strip())
