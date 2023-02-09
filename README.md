@@ -5,6 +5,8 @@
 ![](https://img.shields.io/github/commit-activity/w/DAN3002/Algorithm-Training?style=flat-square)
 
 This is a repository to store my solutions for all contests I joined or training solutions.
+The solutions are organized by contest name or training session, each solution is in its own folder with a detailed explanation of the problem and my solution in the README file.
+
 
 # Table of contents
 <details>
